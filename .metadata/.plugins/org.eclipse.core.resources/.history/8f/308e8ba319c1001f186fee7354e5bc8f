@@ -1,0 +1,37 @@
+package SpringBootmvc.controller;
+
+import java.util.List;
+
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.sathya.springboot.Entity.ProductEntity;
+
+import SpringBootmvc.Employee.Employeemodel;
+import SpringBootmvc.Entity.Employeeentity;
+
+public class Testcontroller {
+	@GetMapping("/Employeeform")
+	  public String getEmployeeForm()
+	  {
+		  return "add-emp";
+	  }
+	  
+	  // to send employee data 
+	  @PostMapping("/submitemployee")
+	  public String sendEmployee(Employeemodel employee)
+	  {
+		  System.out.println(employee);
+		  return "done";
+	  }
+	//read the data
+		@GetMapping("/getEmployeedetails")
+		public String getEmployeedetails(Model model) {
+			List<Employeeentity>employee=cegetAllProducts();
+			
+			//send the product to view layer we need to add into model object
+			model.addAttribute("Products",product);
+			return "Product-list"; 
+		}
+}

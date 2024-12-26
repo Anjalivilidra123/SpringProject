@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Products</title>
+	</head>
+	<style>
+		.error
+		{
+			color:red
+			
+		}
+	</style>
+	<body>
+		<h1>Product Details Form</h1>
+		<form action="/submit" method="POST">
+			<label for="name">Product Name:</label><br>
+			<input type="text" id="name" name="name" required><br><br>
+			<p class="error" th:if="${#fields.haserrors('name')}"th:errors="*{name}"></p>
+			
+			<label for="brand">Brand:</label><br>
+			<input type="text" id="brand" name="brand" required><br><br>
+		
+			<p class="error" th:if="${#fields.haserrors('brand')}"th:errors="*{brand}"></p>
+			
+			<label for="madein">Made In:</label><br>
+			<input type="text" id="madein" name="madein" required><br><br>
+			<p class="error" th:if="${#fields.haserrors('madein')}"th:errors="*{madein}"></p>
+			
+			<label for="price">Price:</label><br>
+			<input type="number" id="price" name="price" step="0.01" required><br><br>
+			<p class="error" th:if="${#fields.haserrors('price')}"th:errors="*{price}"></p>
+			
+			<label for="quantity">Quantity:</label><br>
+			<input type="number" id="quantity" name="quantity" min="1" required><br><br>
+			<p class="error" th:if="${#fields.haserrors('quantity')}"th:errors="*{quantity}"></p>
+			<label for="quantity">Discountprice:</label><br>
+						<input type="number" id="Discountprice" name="quantity" min="1" required><br><br>
+						<p class="error" th:if="${#fields.haserrors('discountprice')}"th:errors="*{discountprice}"></p>
+			
+			<input type="submit" value="Submit">
+			<input type="reset" value="Reset">
+		</form>
+	</body>
+</html>

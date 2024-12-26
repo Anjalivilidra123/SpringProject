@@ -1,0 +1,144 @@
+package com.sathya.springboot.service;
+
+
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.sathya.springboot.Entity.ProductEntity;
+import com.sathya.springboot.Repository.ProductRepository;
+import com.sathya.springboot.model.Productmodel;
+
+
+@Service
+public class ProductService {
+	@Autowired
+	ProductRepository productrepository;
+	
+	public void saveProductdetails(Productmodel Productmodel)
+	{
+		double stockvalue;
+		stockvalue=Productmodel.getPrice()*Productmodel.getQuantity();
+		double discountprice;
+		discountprice=Productmodel.getPrice()*Productmodel.getDiscountrate()/100;
+		double offerprice;
+		offerprice=Productmodel.getPrice()-discountprice;
+		double taxprice;
+		taxprice=18/100*offerprice;
+		double finalprice;
+		finalprice=offerprice+taxprice;
+		
+		ProductEntity productentity=new ProductEntity();
+		productentity.setName(Productmodel.getName());
+		productentity.setBrand(Productmodel.getBrand());
+		productentity.setMadein(Productmodel.getMadein());
+		productentity.setPrice(Productmodel.getPrice());
+		productentity.setQuantity(Productmodel.getQuantity());
+		productentity.setDiscountrate(Productmodel.getDiscountrate());
+		productentity.setDiscountprice(discountprice);
+		productentity.setStockvalue(stockvalue);
+		productentity.setTaxprice(taxprice);
+		productentity.setDiscountprice(finalprice);
+		productentity.setDiscountprice(offerprice);
+		
+		productrepository.save(productentity);
+	}
+	public List<ProductEntity>getAllProducts(){
+		List<ProductEntity>product=productrepository.findAll();
+		return product;
+		
+	}
+	
+	public  ProductEntity searchById(long id) {
+		
+    Optional<ProductEntity> optionalData = productrepository.findById(id);
+    if(optionalData.isPresent())
+    {
+    	ProductEntity product = optionalData.get();
+    	return product;
+   }
+    else
+    {
+    	return null;
+    }
+	}
+	//delete operation
+
+	public void deleteproductById(long id) {
+		
+		productrepository.deleteById(id);
+	}
+	public Productmodel editbyproductid(long id) {
+		Optional<ProductEntity>optional = productrepository.findById(id);
+		
+	 if(optional.isPresent()){
+		 ProductEntity productEntity=optional.get();
+		 Productmodel productmodel=new Productmodel();
+		 productmodel.setName(productEntity.getName());
+		 productmodel.setBrand(productEntity.getBrand());
+		 productmodel.setMadein(productEntity.getMadein());
+		 productmodel.setPrice(productEntity.getPrice());
+		 productmodel.setQuantity(productEntity.getQuantity());
+		 productmodel.setDiscountrate(productEntity.getDiscountrate());
+		 return productmodel;
+	 }
+	 else {
+		 return null;
+	 }
+	}
+	//update operation
+	
+	public void updateproduct(long id,Productmodel productmodel) {
+		Optional<ProductEntity>optional = productrepository.findById(id);
+		if(optional.isPresent())
+		{
+			ProductEntity productEntity=optional.get();
+			ProductEntity productentity=new ProductEntity();			
+			
+			double stockvalue;
+			stockvalue=productmodel.getPrice()*productmodel.getQuantity();
+			double discountprice;
+			discountprice=productmodel.getPrice()*productmodel.getDiscountrate()/100;
+			double offerprice;
+			offerprice=productmodel.getPrice()-discountprice;
+			double taxprice;
+			taxprice=18/100*offerprice;
+			double finalprice;
+			finalprice=offerprice+taxprice;
+			
+			
+			productentity.setName(productmodel.getName());
+			productentity.setBrand(productmodel.getBrand());
+			productentity.setMadein(productmodel.getMadein());
+			productentity.setPrice(productmodel.getPrice());
+			productentity.setQuantity(productmodel.getQuantity());
+			productentity.setDiscountrate(productmodel.getDiscountrate());
+			productentity.setDiscountprice(discountprice);
+			productentity.setStockvalue(stockvalue);
+			productentity.setTaxprice(taxprice);
+			productentity.setDiscountprice(finalprice);
+			productentity.setDiscountprice(offerprice);
+			productrepository.save(productEntity);
+			
+		}
+		
+		
+	}
+
+		 
+		
+	}
+	
+		
+	
+
+	
+ 
+		
+		
+	   
+
+	   
+

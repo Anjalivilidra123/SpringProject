@@ -1,0 +1,5 @@
+package SpringBootmvc.Entity;
+
+public class Employeeentity {
+
+}

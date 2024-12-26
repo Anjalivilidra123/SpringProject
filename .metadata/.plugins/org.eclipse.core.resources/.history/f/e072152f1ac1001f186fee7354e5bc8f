@@ -1,0 +1,65 @@
+package Employeeservice;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import SpringBootmvc.Entity.Employeeentity;
+
+public class Employeeservice {
+	
+	 @Service
+	public class Employeeservice {
+	@Autowired
+		Employeerepository Employeerepository;
+		
+		public void saveemployeedetails (Employeemodel employeemodel) {
+			double da;
+			da=employeemodel.getSalary()*0.1;
+			double hra;
+			hra=employeemodel.getSalary()*0.9;
+			double totalsalary;
+			totalsalary=employeemodel.getSalary()+da+hra;
+			Employeeentity employeeentity=new Employeeentity();
+			employeeentity.setName(employeemodel.getName());
+			employeeentity.setPhoneno(employeemodel.getPhoneno());
+			employeeentity.setGender(employeemodel.getGender());
+			employeeentity.setDoj(employeemodel.getDoj());
+			employeeentity.setDeptname(employeemodel.getDeptname());
+			employeeentity.setSalary(employeemodel.getSalary());
+			employeeentity.setDa(da);
+			employeeentity.setHra(hra);
+			employeeentity.setTotalsalary(totalsalary);
+		employeerepository.save(employeeentity);
+		}
+		public List<Employeeentity> getallemployeedetails(){
+			List<Employeeentity>employee=employeerepository.findAll();
+			return employee;
+			
+		}
+		public Employeeentity searchbyid(int id) {
+			Optional<Employeeentity>optionaldata=employeerepository.findById(id);
+			if(optionaldata.isPresent()) {
+				Employeeentity employee = optionaldata.get();
+				return employee; 
+			}
+			else
+			{
+				return null;
+			}
+		}
+		public void deleteemployeebyid(long id) {
+			employeerepository.deleteById(id);
+		
+			
+		}	
+	}
+
+	public static List<Employeeentity> getallemployeedetails() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
+}

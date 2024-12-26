@@ -1,0 +1,9 @@
+package com.sathya.springmvccontroller;
+
+
+public class TestClient {
+	int id;
+	String name;
+	double salary;
+}
+

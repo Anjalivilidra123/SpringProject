@@ -1,0 +1,19 @@
+package com.sathya.springboot.Entity;
+
+
+public class ProductEntity {
+	private long id;
+    private String name;
+    private String brand;
+    private String madeIn;
+    private double price;
+    private int quantity;
+    private int discountPrice;
+    private double taxRate;
+    private double offerPrice;
+    private double finalPrice;
+    private double stockValue;
+	private double discountrate;
+	
+
+}

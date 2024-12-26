@@ -1,0 +1,5 @@
+package com.sathya.springmvccontroller;
+
+public class TestClient {
+
+}
